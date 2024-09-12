@@ -1,0 +1,43 @@
+<header>
+  <p>Header part</p>
+  <button (click)="logout()">
+    Logout
+  </button>
+</header>
+<div *ngIf="error$ | async as errorMessage; else content">
+  <p>{{ errorMessage }}</p>
+</div>
+<ng-template #content>
+  <div *ngIf="noUsers$ | async; else usersList">
+    <p>No users found.</p>
+  </div>
+
+  <ng-template #usersList>
+  <div *ngIf="(users$ | async) as usersResponse; else loading">
+      <div *ngIf="usersResponse.status === 200">        
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Framework</th>
+              <th>Mobile</th>
+              <th>Age</th>
+            </tr>
+            <tr *ngFor="let user of usersResponse.data">
+              <td>{{user.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.framework}}</td>
+              <td>{{user.mobile}}</td>
+              <td>{{user.age}}</td>
+            </tr>
+          </table>
+      </div>
+      <div *ngIf="usersResponse.status !== 200">
+          <p>Error fetching users.</p>
+      </div>
+  </div>
+</ng-template>
+<ng-template #loading>
+    <p>Loading...</p>
+</ng-template>
+</ng-template>
