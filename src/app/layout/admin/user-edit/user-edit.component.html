@@ -1,0 +1,25 @@
+<!-- user-form.component.html -->
+<form [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
+    <div>
+        <label for="name">User Name</label>
+        <input type="text" formControlName="name" id="name">
+    </div>
+    <div>
+        <label for="mobile">Mobile</label>
+        <input type="number" formControlName="mobile" id="mobile">
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <input type="number" formControlName="age" id="age">
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" id="email">
+    </div>
+    <div>
+        <label for="framework">Framework</label>
+        <input type="text" formControlName="framework" id="framework">
+    </div>
+
+    <button type="submit">Submit</button>
+</form>

@@ -1,0 +1,75 @@
+$primary-color: #5bc0de;
+$error-color: #d9534f;
+$background-color: #f4f4f4;
+$text-color: #333;
+$table-header-bg: #f2f2f2;
+$table-row-alt-bg: #f9f9f9;
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: $background-color;
+}
+
+div {
+  p {
+    color: $error-color;
+    background-color: lighten($error-color, 30%);
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid $error-color;
+    border-radius: 4px;
+  }
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: $table-header-bg;
+    color: $text-color;
+  }
+
+  tr:nth-child(even) {
+    background-color: $table-row-alt-bg;
+  }
+}
+
+p {
+  font-size: 16px;
+  color: $text-color;
+  margin: 20px;
+}
+
+.action-btn {
+  width: 15%;
+  section {
+    display: flex;
+    gap: 10px;
+  }
+}

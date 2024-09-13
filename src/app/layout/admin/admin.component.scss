@@ -1,16 +1,14 @@
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+button {
+    color: #fff;
+    background-color: #f44414;
+    border: none;
+    font-size: 16px;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-td,
-th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
+button:hover {
+    background-color: #b2300c;
 }
