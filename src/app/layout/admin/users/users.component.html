@@ -1,46 +1,42 @@
-<div *ngIf="error$ | async as errorMessage; else content">
-    <p>{{ errorMessage }}</p>
-</div>
-<ng-template #content>
-    <div *ngIf="noUsers$ | async; else usersList">
-        <p>No users found.</p>
-        <button (click)="goToCreteUser()">Create user</button>
+<div class="component-container">
+    <div *ngIf="error$ | async as errorMessage; else content" class="error-message">
+        <p>{{ errorMessage }}</p>
     </div>
 
-    <ng-template #usersList>
-        <button (click)="goToCreteUser()">Add user</button>
-        <div *ngIf="(users$ | async) as usersResponse; else loading">
-            <div *ngIf="usersResponse.status === 200">
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Framework</th>
-                        <th>Mobile</th>
-                        <th>Age</th>
-                        <th>Actions</th>
-                    </tr>
-                    <tr *ngFor="let user of usersResponse.data; let i = index">
-                        <td>{{user.name}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.framework}}</td>
-                        <td>{{user.mobile}}</td>
-                        <td>{{user.age}}</td>
-                        <td class="action-btn">
-                            <section>
-                                <button (click)="editUser(i)">Edit</button>
-                                <button (click)="viewUser(1)">View</button>
-                            </section>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div *ngIf="usersResponse.status !== 200">
-                <p>Error fetching users.</p>
-            </div>
+    <ng-template #content>
+        <div *ngIf="noUsers$ | async; else usersList" class="no-users-container">
+            <p>No users found.</p>
+            <button class="create-user" (click)="goToCreteUser()">Create user</button>
         </div>
+
+        <ng-template #usersList>
+            <div class="actions-container">
+                <button class="create-user" (click)="goToCreteUser()">Add user</button>
+            </div>
+            <div *ngIf="(users$ | async) as usersResponse; else loading" class="users-list">
+                <div *ngIf="usersResponse.status === 200; else errorFetching" class="list-container">
+                    <div class="user-card" *ngFor="let user of usersResponse.data">
+                        <div (click)="viewUser(user.id)" class="user-info">
+                            <h3>{{ user.name }}</h3>
+                            <p><strong>Email:</strong> {{ user.email }}</p>
+                            <p><strong>Framework:</strong> {{ user.framework }}</p>
+                            <p><strong>Mobile:</strong> {{ user.mobile }}</p>
+                            <p><strong>Age:</strong> {{ user.age }}</p>
+                        </div>
+                        <div class="action-btns">
+                            <button (click)="editUser(user.id)">Edit</button>
+                            <button (click)="deleteUser(user.id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #errorFetching>
+                    <p>Error fetching users.</p>
+                </ng-template>
+            </div>
+        </ng-template>
+
+        <ng-template #loading>
+            <p class="loading">Loading...</p>
+        </ng-template>
     </ng-template>
-    <ng-template #loading>
-        <p>Loading...</p>
-    </ng-template>
-</ng-template>
+</div>

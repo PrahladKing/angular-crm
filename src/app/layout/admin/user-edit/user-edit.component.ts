@@ -33,6 +33,10 @@ export class UserEditComponent implements OnInit{
     }
   }
 
+  getUserDetails(id: number) {
+    
+  }
+
   userForm: FormGroup = this.fb.group({
     name: [''],
     age: [''],

@@ -1,75 +1,94 @@
-$primary-color: #5bc0de;
-$error-color: #d9534f;
-$background-color: #f4f4f4;
-$text-color: #333;
-$table-header-bg: #f2f2f2;
-$table-row-alt-bg: #f9f9f9;
-
-body {
+/* Container for the entire component */
+.component-container {
+  padding: 20px;
   font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Error message styling */
+.error-message p {
+  color: red;
+  font-weight: bold;
   margin: 0;
-  padding: 0;
-  background-color: $background-color;
 }
 
-div {
-  p {
-    color: $error-color;
-    background-color: lighten($error-color, 30%);
-    padding: 15px;
-    font-size: 16px;
-    border: 1px solid $error-color;
-    border-radius: 4px;
-  }
+/* No users container styling */
+.no-users-container, .actions-container {
+  margin-top: 20px;
 }
 
-button {
-  background-color: $primary-color;
+/* Button to create or add users */
+.create-user {
+  background-color: #28a745;
   color: white;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 10px 15px;
   border-radius: 4px;
   cursor: pointer;
-  margin: 10px 0;
-
-  &:hover {
-    background-color: darken($primary-color, 10%);
-  }
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background-color: $table-header-bg;
-    color: $text-color;
-  }
-
-  tr:nth-child(even) {
-    background-color: $table-row-alt-bg;
-  }
+.create-user:hover {
+  background-color: #218838;
 }
 
-p {
+/* Users list container styling */
+.users-list div.list-container{
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px; /* Space between cards */
+}
+
+/* User card styling */
+.user-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info {
+  cursor: pointer;
+  h3 {
+    margin-top: 0;
+    font-size: 18px;
+  }
+
+  p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+} 
+
+.action-btns {
+  margin-top: auto; /* Push buttons to the bottom */
+  display: flex;
+  gap: 10px;
+}
+
+.action-btns button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.action-btns button:hover {
+  background-color: #0056b3;
+}
+
+/* Loading message styling */
+.loading {
+  margin-top: 20px;
   font-size: 16px;
-  color: $text-color;
-  margin: 20px;
-}
-
-.action-btn {
-  width: 15%;
-  section {
-    display: flex;
-    gap: 10px;
-  }
+  color: #666;
 }

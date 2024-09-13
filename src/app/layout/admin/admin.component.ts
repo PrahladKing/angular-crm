@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import { Router, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +12,6 @@ import { Router, RouterOutlet } from '@angular/router';
 export class AdminComponent implements OnInit{
 
   private auth = inject(AuthService);
-  private router = inject(Router);
   
   constructor() {
 
@@ -23,7 +22,6 @@ export class AdminComponent implements OnInit{
 
   logout() {
     this.auth.adminLogout();
-    this.router.navigateByUrl("/signin/admin")
   }
 
 }

@@ -1,1 +1,5 @@
-<p>user works!</p>
+@if (user) {
+    <h1>
+        {{user | json}}
+    </h1>
+}

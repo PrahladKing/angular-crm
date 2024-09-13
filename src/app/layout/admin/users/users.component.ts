@@ -5,6 +5,8 @@ import { ApiResponse } from '../../../shared/models/api-response';
 import { User } from '../../../shared/models/user';
 import { CrudService } from '../../../shared/services/crud.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-users',
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit{
 
   private crud = inject(CrudService);
+  private auth = inject(AuthService);
   private router = inject(Router);
   
   constructor() {
@@ -30,7 +33,10 @@ export class UsersComponent implements OnInit{
   noUsers$!: Observable<boolean>;
   getUsers() {
     this.users$ = this.crud.getUsers().pipe(
-      catchError(error => {
+      catchError((error: HttpErrorResponse) => {
+        if(error.status === 403) {
+          this.auth.adminLogout();
+        }
         this.error$ = of("An error occurred while fetching users. Please try again later.");
         return of(null)
       }),
@@ -46,10 +52,15 @@ export class UsersComponent implements OnInit{
     this.router.navigate(['/home/admin/user/new/edit'])
   }
 
-  viewUser(id: number) {
+  viewUser(id: number | undefined) {
+    if(id) this.router.navigate(['/home/admin/user', id])
+  }
+
+  deleteUser(id: number | undefined) {
+    
   }
   
-  editUser(id: number) {
-    this.router.navigate(['/home/admin/user', id, "edit"])
+  editUser(id: number | undefined) {
+    if(id) this.router.navigate(['/home/admin/user', id, "edit"])
   }
 }
