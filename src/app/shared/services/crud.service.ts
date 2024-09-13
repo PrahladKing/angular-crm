@@ -32,7 +32,11 @@ export class CrudService {
   }
 
   getUser(id: number) {
-    return this.http.get<{status: number, message: string, user: User}>(`${this.api}/user/${id}`, {headers: this.headers})
+    return this.http.get<{status: number, message: string, data: User}>(`${this.api}/user/${id}`, {headers: this.headers})
+  }
+
+  editUser(user: User, id: number) {
+    return this.http.put<{status: number, message: string}>(`${this.api}/user/${id}`, user, {headers: this.headers})
   }
 
 }

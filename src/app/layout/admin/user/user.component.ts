@@ -33,7 +33,7 @@ export class UserComponent implements OnInit{
     this.crud.getUser(id).subscribe({
       next: (value) => {
         if(value.status === 200) {
-          this.user = value.user;
+          this.user = value.data;
         }
       },
       error: (err) => {

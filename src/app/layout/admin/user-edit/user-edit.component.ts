@@ -26,15 +26,37 @@ export class UserEditComponent implements OnInit{
   }
 
   type = 'create';
+  id: number = 0;
   getRouteParams() {
     let id = this.route.snapshot.params['id'];
     if(id !== 'new') {
       this.type = "edit";
+      this.id = +id;
+      this.getUserDetails(+id);
     }
   }
 
   getUserDetails(id: number) {
-    
+    this.crud.getUser(id).subscribe({
+      next: (value) => {
+        if(value.status === 200) {
+          this.fillUserForm(value.data);
+        }
+      },
+      error: (err) => {
+        
+      },
+    })
+  }
+
+  fillUserForm(user: User) {
+    this.userForm.patchValue({
+      name: user.name,
+      age: user.age,
+      email: user.email,
+      mobile: user.mobile,
+      framework: user.framework
+    })
   }
 
   userForm: FormGroup = this.fb.group({
@@ -54,13 +76,30 @@ export class UserEditComponent implements OnInit{
       framework: fd.framework ?? ""
     };
     // console.log(user);
-    this.createUser(user);
+    if(this.type === "create") {
+      this.createUser(user);
+    } else {
+      this.editUser(user, this.id)
+    }
   }
 
   createUser(user: User) {
     this.crud.createUser(user).subscribe({
       next: (value) => {
         if(value.status === 201) {
+          this.router.navigateByUrl("/home/admin");
+        }
+      },
+      error: (err) => {
+        
+      },
+    })
+  }
+
+  editUser(user: User, id: number) {
+    this.crud.editUser(user, id).subscribe({
+      next: (value) => {
+        if(value.status === 200) {
           this.router.navigateByUrl("/home/admin");
         }
       },
